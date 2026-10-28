@@ -1,0 +1,19 @@
+{
+  "fieldrepairs_title": "Field Repairs",
+  "fieldrepairs_restart_note": "Changes apply at once",
+
+  "fieldrepairs_husk_customization": "Husk customization crash",
+  "fieldrepairs_husk_customization_desc": "Alive checks in CharacterCustomization:_part_loaded_callback. Prevents an engine crash when a joiner aborts while the husk is spawned.",
+
+  "fieldrepairs_mission_script_queue": "Mission script callback queue",
+  "fieldrepairs_mission_script_queue_desc": "Cheap callback queue for mission scripts. Fixes frametime spikes in maps with many polling elements (Odin's Fall). Applies from the next raid.",
+
+  "fieldrepairs_world_leak": "Mission world leak",
+  "fieldrepairs_world_leak_desc": "Lets go of what a destroyed mission world still holds. Saves 10-20 MB of Lua heap per raid that is started and left.",
+
+  "fieldrepairs_waypoint": "Waypoint without target",
+  "fieldrepairs_waypoint_desc": "Skips waypoints that have neither a position nor a living unit instead of raising a Lua error.",
+
+  "fieldrepairs_portal_units": "Portal group units",
+  "fieldrepairs_portal_units_desc": "Removes units from portal unit groups when their id is removed, so removed units are not kept."
+}

@@ -1,7 +1,8 @@
 # Field Repairs
 
 Collection of small crash, stability and performance fixes for RAID: WW2. Each fix is one hook
-and one file in `lua/`; they are independent of each other and have no settings.
+and one file in `lua/`; they are independent of each other. Each can be switched off in Options > Field Repairs
+(saved in `saves/FieldRepairs.txt`, applies at once; the callback queue from the next raid).
 
 Author: BangL
 
@@ -10,6 +11,8 @@ Author: BangL
 | [Husk customization crash](#husk-customization-crash) | `lib/units/characters/charactercustomization` | `lua/CharacterCustomization.lua` | Engine crash when a joiner aborts while the husk is spawned |
 | [Mission script callback queue](#mission-script-callback-queue) | `lib/managers/missionmanager` | `lua/MissionScript.lua` | Frametime spikes in maps with many polling mission elements (Odin's Fall) |
 | [Mission world leak](#mission-world-leak) | `core/lib/managers/coreworldcollection` | `lua/CoreWorldCollection.lua` | 10-20 MB of Lua heap stay behind per raid that is started and left |
+| [Waypoint without target](#waypoint-without-target) | `lib/managers/hudmanager` | `lua/HUDManager.lua` | Lua error when a waypoint has neither position nor unit |
+| [Portal group unit leak](#portal-group-unit-leak) | `core/lib/managers/coreportalmanager` | `lua/CorePortalManager.lua` | Removed units stay referenced in portal unit groups |
 
 ## Installation
 
@@ -154,3 +157,14 @@ Failures while collecting or releasing are caught with `blt.pcall` and logged as
 Risks: the registry is scanned once per destroyed world. The upvalue check only finds
 callbacks that follow the `callback(object, ...)` pattern; others stay (no wrong removal,
 just no gain).
+
+## Waypoint without target
+
+`HUDManager:add_waypoint` does `data.position or data.unit:position()`. If a waypoint has no
+position and its unit is nil or dead, that errors. The wrapper skips such a waypoint and logs a
+warning (`[Field Repairs] Waypoint <id> has neither position nor unit`). Idea from The Fixes (PD2).
+
+## Portal group unit leak
+
+`PortalUnitGroup:remove_unit_id` only clears the id, the unit stays in `_units`. The wrapper
+also removes that unit (by identity) from `_units`. Idea from Celer (PD2).

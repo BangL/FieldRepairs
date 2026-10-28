@@ -2,7 +2,9 @@
 -- alive checks. The dyn_resource callback can fire synchronously while a husk
 -- is being spawned (drop-in); if the husk is destroyed meanwhile (joiner
 -- aborts), the native get/rotation calls on dead objects crash the engine.
-function CharacterCustomization:_part_loaded_callback(params)
+local part_loaded_callback = CharacterCustomization._part_loaded_callback
+
+local function part_loaded_callback_fixed(self, params)
     self._loading_units[params.name] = nil
 
     if params.current_version < (managers.character_customization:get_current_version_to_attach() or 0) then
@@ -66,4 +68,12 @@ function CharacterCustomization:_part_loaded_callback(params)
             self._unit:contour():update_materials()
         end
     end
+end
+
+function CharacterCustomization:_part_loaded_callback(params)
+	if FieldRepairs:IsEnabled("husk_customization") then
+		return part_loaded_callback_fixed(self, params)
+	end
+
+	return part_loaded_callback(self, params)
 end

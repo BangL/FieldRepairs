@@ -13,6 +13,8 @@ core:import("CoreMissionManager")
 -- the instances are created from the core class, not from the global lib subclass
 local MissionScript = CoreMissionManager.MissionScript
 local insert = table.insert
+local original_insert_sorted = MissionScript.__insert_sorted
+local original_update = MissionScript.update
 
 local function insert_sorted(sorted, cb)
 	local key = cb.next
@@ -49,11 +51,27 @@ local function insert_sorted(sorted, cb)
 	insert(sorted, lo, key)
 end
 
+-- The queue is either the vanilla array or the buckets, never both: the mode is chosen when the first
+-- callback is queued (clear() starts a new queue), so the option applies from the next raid.
 function MissionScript:__insert_sorted(cb)
-	insert_sorted(self._sorted, cb)
+	local sorted = self._sorted
+
+	if sorted.buckets_mode == nil then
+		sorted.buckets_mode = FieldRepairs:IsEnabled("mission_script_queue")
+	end
+
+	if sorted.buckets_mode then
+		insert_sorted(sorted, cb)
+	else
+		original_insert_sorted(self, cb)
+	end
 end
 
 function MissionScript:update(t, dt)
+	if not self._sorted.buckets_mode then
+		return original_update(self, t, dt)
+	end
+
 	self._t = self._t + dt
 
 	while true do

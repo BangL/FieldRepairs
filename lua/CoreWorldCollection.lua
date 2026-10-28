@@ -92,6 +92,10 @@ local function release_elements(elements)
 end
 
 function CoreWorldCollection:destroy_world(world_id, ...)
+	if not FieldRepairs:IsEnabled("world_leak") then
+		return destroy_world(self, world_id, ...)
+	end
+
 	local ok, elements = blt.pcall(collect_elements, self, world_id)
 
 	local result = destroy_world(self, world_id, ...)

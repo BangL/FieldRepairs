@@ -2,7 +2,7 @@
 <mod name="Field Repairs" image="icon.png"
      description="Collection of small crash and stability fixes, plus a cheap mission script callback queue (Odin's Fall frametime spikes) and a fix for mission worlds leaking Lua heap."
      author="BangL"
-     version="0.1"
+     version="0.2"
      min_sblt_version="2.0.0"
      priority="900"
      color="60 60 60">
@@ -11,12 +11,26 @@
             <host meta="https://raw.githubusercontent.com/BangL/raid-mods-meta/main/fieldrepairs.json"/>
         </update>
     </updates>
+    <localization directory="loc">
+        <loc file="english.json"
+             language="english" />
+        <loc file="german.json"
+             language="german" />
+    </localization>
     <hooks>
+        <pre hook_id="core/lib/system/coresystem"
+             script_path="FieldRepairs.lua" />
+        <post hook_id="lib/managers/menu/menucomponentmanager"
+              script_path="lua/menucomponentmanager.lua" />
         <post hook_id="lib/units/characters/charactercustomization"
               script_path="lua/CharacterCustomization.lua" />
         <post hook_id="lib/managers/missionmanager"
               script_path="lua/MissionScript.lua" />
         <post hook_id="core/lib/managers/coreworldcollection"
               script_path="lua/CoreWorldCollection.lua" />
+        <post hook_id="lib/managers/hudmanager"
+              script_path="lua/HUDManager.lua" />
+        <post hook_id="core/lib/managers/coreportalmanager"
+              script_path="lua/CorePortalManager.lua" />
     </hooks>
 </mod>
