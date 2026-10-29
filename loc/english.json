@@ -15,5 +15,8 @@
   "fieldrepairs_waypoint_desc": "Skips waypoints that have neither a position nor a living unit instead of raising a Lua error.",
 
   "fieldrepairs_portal_units": "Portal group units",
-  "fieldrepairs_portal_units_desc": "Removes units from portal unit groups when their id is removed, so removed units are not kept."
+  "fieldrepairs_portal_units_desc": "Removes units from portal unit groups when their id is removed, so removed units are not kept.",
+
+  "fieldrepairs_attention_corpses": "Corpses in enemy detection",
+  "fieldrepairs_attention_corpses_desc": "Skips corpses and friendly units in enemy detection. Big speedup in large fights."
 }

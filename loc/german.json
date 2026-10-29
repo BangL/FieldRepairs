@@ -15,5 +15,8 @@
   "fieldrepairs_waypoint_desc": "Überspringt Waypoints ohne Position und ohne lebende Unit, statt einen Lua-Fehler auszulösen.",
 
   "fieldrepairs_portal_units": "Units der Portal-Gruppen",
-  "fieldrepairs_portal_units_desc": "Entfernt Units aus Portal-Gruppen, wenn ihre ID entfernt wird, damit entfernte Units nicht gehalten werden."
+  "fieldrepairs_portal_units_desc": "Entfernt Units aus Portal-Gruppen, wenn ihre ID entfernt wird, damit entfernte Units nicht gehalten werden.",
+
+  "fieldrepairs_attention_corpses": "Leichen in der Gegner-Erkennung",
+  "fieldrepairs_attention_corpses_desc": "Überspringt Leichen und Verbündete in der Gegner-Erkennung. Viel schneller bei großen Gefechten."
 }

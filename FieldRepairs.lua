@@ -12,6 +12,7 @@ FieldRepairs.fixes = {
 	"world_leak",
 	"waypoint",
 	"portal_units",
+	"attention_corpses",
 }
 FieldRepairs.config = {}
 

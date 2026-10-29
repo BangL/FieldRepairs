@@ -2,7 +2,7 @@
 <mod name="Field Repairs" image="icon.png"
      description="Collection of small crash and stability fixes, plus a cheap mission script callback queue (Odin's Fall frametime spikes) and a fix for mission worlds leaking Lua heap."
      author="BangL"
-     version="0.3"
+     version="0.4"
      min_sblt_version="2.0.0"
      priority="900"
      color="60 60 60">
@@ -30,6 +30,8 @@
               script_path="lua/CoreWorldCollection.lua" />
         <post hook_id="lib/managers/hudmanager"
               script_path="lua/HUDManager.lua" />
+        <post hook_id="lib/managers/group_ai_states/groupaistatebase"
+              script_path="lua/GroupAIStateBase.lua" />
         <post hook_id="core/lib/managers/coreportalmanager"
               script_path="lua/CorePortalManager.lua" />
     </hooks>

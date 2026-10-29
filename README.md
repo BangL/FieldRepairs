@@ -13,6 +13,7 @@ Author: BangL
 | [Mission world leak](#mission-world-leak) | `core/lib/managers/coreworldcollection` | `lua/CoreWorldCollection.lua` | 10-20 MB of Lua heap stay behind per raid that is started and left |
 | [Waypoint without target](#waypoint-without-target) | `lib/managers/hudmanager` | `lua/HUDManager.lua` | Lua error when a waypoint has neither position nor unit |
 | [Portal group unit leak](#portal-group-unit-leak) | `core/lib/managers/coreportalmanager` | `lua/CorePortalManager.lua` | Removed units stay referenced in portal unit groups |
+| [Corpses in enemy detection](#corpses-in-enemy-detection) | `lib/managers/group_ai_states/groupaistatebase` | `lua/GroupAIStateBase.lua` | Detection walks every corpse per unit and tick, bad frametime in big fights with a high corpse limit |
 
 ## Installation
 
@@ -168,3 +169,36 @@ warning (`[Field Repairs] Waypoint <id> has neither position nor unit`). Idea fr
 
 `PortalUnitGroup:remove_unit_id` only clears the id, the unit stays in `_units`. The wrapper
 also removes that unit (by identity) from `_units`. Idea from Celer (PD2).
+
+## Corpses in enemy detection
+
+### Symptom
+
+Big fights (20+ enemies) get slow, 16 FPS in Settlement with the corpse limit (video settings) at 128.
+
+### Measurements
+
+Live with `LuaDebugAPI`, 10 s window, 26 living enemies, 129 corpses:
+
+- `EnemyManager:update` 74% of the frame time, nearly all of it `CopLogicBase._upd_attention_obj_detection`
+  (68%, about 3 ms per call, ~210 calls per second).
+- Each call walks ~159 attention objects: 129 corpses (slot 17), 26 living enemies, bots and players.
+  About 250,000 loop iterations per second, 80% of them for dead units.
+- Mission area triggers, `GroupAIStateBase:update`, HUD and movement together stay below 10%.
+
+### Cause
+
+A dead enemy stays a registered attention object until its corpse is disposed of, which happens at
+`corpse_limit` (default 32, up to 250). Every living enemy and bot checks every one of them each detection tick.
+
+### Fix
+
+`get_AI_attention_objects_by_filter` returns a copy without dead units once the level is loud. In stealth the vanilla set
+is used, guards still find bodies. The copy is cached per filter and rebuilt when an attention object is registered,
+changed or removed, and at the latest after a second (units that died since). The vanilla sets are not touched.
+
+### Risks
+
+- Enemies and bots do not react to corpses while loud. Nothing in the vanilla code uses that (only the stealth
+  voice lines and alerts for bodies), but this was read from the code, not played through.
+- A unit that died stays in the set for up to a second.
