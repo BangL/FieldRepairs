@@ -53,6 +53,7 @@ Hooks:Add("MenuComponentManagerInitialize", "FieldRepairs_MenuComponentManagerIn
 		name = "fieldrepairs_options",
 		name_id = "fieldrepairs_title",
 		inject_list = "blt_options",
+		icon = "waypoint_special_tools",
 		class = FieldRepairsMenu,
 	})
 end)
