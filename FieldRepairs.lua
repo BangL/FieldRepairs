@@ -5,7 +5,7 @@
 _G.FieldRepairs = _G.FieldRepairs or {}
 local FieldRepairs = _G.FieldRepairs
 
-FieldRepairs.config_path = SavePath .. "FieldRepairs.txt"
+FieldRepairs.config_path = SavePath .. "FieldRepairs.json"
 FieldRepairs.fixes = {
 	"husk_customization",
 	"mission_script_queue",

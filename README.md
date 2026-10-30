@@ -2,7 +2,7 @@
 
 Collection of small crash, stability and performance fixes for RAID: WW2. Each fix is one hook
 and one file in `lua/`; they are independent of each other. Each can be switched off in Options > Field Repairs
-(saved in `saves/FieldRepairs.txt`, applies at once; the callback queue from the next raid).
+(saved in `saves/FieldRepairs.json`, applies at once; the callback queue from the next raid).
 
 Author: BangL
 
