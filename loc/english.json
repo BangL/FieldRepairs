@@ -18,5 +18,8 @@
   "fieldrepairs_portal_units_desc": "Removes units from portal unit groups when their id is removed, so removed units are not kept.",
 
   "fieldrepairs_attention_corpses": "Corpses in enemy detection",
-  "fieldrepairs_attention_corpses_desc": "Skips corpses and friendly units in enemy detection. Big speedup in large fights."
+  "fieldrepairs_attention_corpses_desc": "Skips corpses and friendly units in enemy detection. Big speedup in large fights.",
+
+  "fieldrepairs_bot_weapon": "Bot weapon when downed",
+  "fieldrepairs_bot_weapon_desc": "Keeps the weapon of a downed bot visible. Vanilla hides it, so the bot shoots with an invisible weapon."
 }

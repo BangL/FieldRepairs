@@ -18,5 +18,8 @@
   "fieldrepairs_portal_units_desc": "Entfernt Units aus Portal-Gruppen, wenn ihre ID entfernt wird, damit entfernte Units nicht gehalten werden.",
 
   "fieldrepairs_attention_corpses": "Leichen in der Gegner-Erkennung",
-  "fieldrepairs_attention_corpses_desc": "Überspringt Leichen und Verbündete in der Gegner-Erkennung. Viel schneller bei großen Gefechten."
+  "fieldrepairs_attention_corpses_desc": "Überspringt Leichen und Verbündete in der Gegner-Erkennung. Viel schneller bei großen Gefechten.",
+
+  "fieldrepairs_bot_weapon": "Bot-Waffe im Downed-Zustand",
+  "fieldrepairs_bot_weapon_desc": "Hält die Waffe eines gedownten Bots sichtbar. Vanilla blendet sie aus, der Bot schießt dann mit unsichtbarer Waffe."
 }

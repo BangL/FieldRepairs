@@ -34,5 +34,9 @@
               script_path="lua/GroupAIStateBase.lua" />
         <post hook_id="core/lib/managers/coreportalmanager"
               script_path="lua/CorePortalManager.lua" />
+        <post hook_id="lib/units/player_team/teamaiinventory"
+              script_path="lua/TeamAIInventory.lua" />
+        <post hook_id="lib/units/player_team/huskteamaiinventory"
+              script_path="lua/TeamAIInventory.lua" />
     </hooks>
 </mod>

@@ -13,6 +13,7 @@ FieldRepairs.fixes = {
 	"waypoint",
 	"portal_units",
 	"attention_corpses",
+	"bot_weapon",
 }
 FieldRepairs.config = {}
 

@@ -14,6 +14,7 @@ Author: BangL
 | [Waypoint without target](#waypoint-without-target) | `lib/managers/hudmanager` | `lua/HUDManager.lua` | Lua error when a waypoint has neither position nor unit |
 | [Portal group unit leak](#portal-group-unit-leak) | `core/lib/managers/coreportalmanager` | `lua/CorePortalManager.lua` | Removed units stay referenced in portal unit groups |
 | [Corpses in enemy detection](#corpses-in-enemy-detection) | `lib/managers/group_ai_states/groupaistatebase` | `lua/GroupAIStateBase.lua` | Detection walks every corpse per unit and tick, bad frametime in big fights with a high corpse limit |
+| [Bot weapon when downed](#bot-weapon-when-downed) | `lib/units/player_team/teamaiinventory`, `huskteamaiinventory` | `lua/TeamAIInventory.lua` | A downed bot shoots with its weapon hidden |
 
 ## Installation
 
@@ -202,3 +203,17 @@ changed or removed, and at the latest after a second (units that died since). Th
 - Enemies and bots do not react to corpses while loud. Nothing in the vanilla code uses that (only the stealth
   voice lines and alerts for bodies), but this was read from the code, not played through.
 - A unit that died stays in the set for up to a second.
+
+## Bot weapon when downed
+
+A bot that goes down hides its weapon: the downed animation calls the hide_weapon callback of `CopInventory`, which ends in
+`PlayerInventory:hide_equipped_unit`. The bot keeps shooting (with the pistol, `SLOT_1`) but nobody sees a weapon in its hands.
+
+`hide_equipped_unit` does nothing for `TeamAIInventory` and `HuskTeamAIInventory`. Equipping and unequipping still show and
+place the weapon as before.
+
+### Risks
+
+- Only the local display changes, nothing is synced. Whether the hiding was intended (e.g. against clipping with the downed
+  pose) is unknown; with the Luger and the M1911 it looked fine.
+- The weapon also stays visible in other states that call the hide callback for bots (not checked: revive, carry).
