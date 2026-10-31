@@ -8,7 +8,7 @@
      color="60 60 60">
     <updates>
         <update identifier="fieldrepairs">
-            <host meta="https://raw.githubusercontent.com/BangL/raid-mods-meta/main/fieldrepairs.json"/>
+            <host meta="https://raw.githubusercontent.com/BangL/raid-mods-meta/main/fieldrepairs.json" patchnotes="https://github.com/BangL/FieldRepairs/blob/master/CHANGELOG.md"/>
         </update>
     </updates>
     <localization directory="loc">
