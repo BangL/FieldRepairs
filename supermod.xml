@@ -2,7 +2,7 @@
 <mod name="Field Repairs" image="icon.png"
      description="Collection of small crash and stability fixes, plus a cheap mission script callback queue (Odin's Fall frametime spikes) and a fix for mission worlds leaking Lua heap."
      author="BangL"
-     version="0.5.0"
+     version="0.5.1"
      min_sblt_version="2.0.0"
      priority="900"
      color="60 60 60">

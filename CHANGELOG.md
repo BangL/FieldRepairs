@@ -1,3 +1,6 @@
+0.5.1:
+- fix: bots in stealth (still cool) have their weapon hidden again, only downed or alerted bots keep it visible
+
 0.5.0:
 - Bot weapon when downed: downed bots keep their weapon visible
 
