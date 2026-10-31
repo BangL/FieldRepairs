@@ -14,6 +14,7 @@ FieldRepairs.fixes = {
 	"portal_units",
 	"attention_corpses",
 	"bot_weapon",
+	"turret_attacker",
 }
 FieldRepairs.config = {}
 

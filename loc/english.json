@@ -21,5 +21,8 @@
   "fieldrepairs_attention_corpses_desc": "Skips corpses and friendly units in enemy detection. Big speedup in large fights.",
 
   "fieldrepairs_bot_weapon": "Bot weapon when downed",
-  "fieldrepairs_bot_weapon_desc": "Keeps the weapon of a downed bot visible. Vanilla hides it, so the bot shoots with an invisible weapon."
+  "fieldrepairs_bot_weapon_desc": "Keeps the weapon of a downed bot visible. Vanilla hides it, so the bot shoots with an invisible weapon.",
+
+  "fieldrepairs_turret_attacker": "Turret gunner damage",
+  "fieldrepairs_turret_attacker_desc": "Ignores damage to turret gunners whose attacker unit no longer exists. Prevents a possible engine crash."
 }

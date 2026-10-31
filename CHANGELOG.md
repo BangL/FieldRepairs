@@ -1,3 +1,6 @@
+0.5.2:
+- fix: possible engine crash when a turret gunner is damaged by an explosion with a destroyed attacker unit
+
 0.5.1:
 - fix: bots in stealth (still cool) have their weapon hidden again, only downed or alerted bots keep it visible
 

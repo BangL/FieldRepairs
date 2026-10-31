@@ -15,6 +15,7 @@ Author: BangL
 | [Portal group unit leak](#portal-group-unit-leak) | `core/lib/managers/coreportalmanager` | `lua/CorePortalManager.lua` | Removed units stay referenced in portal unit groups |
 | [Corpses in enemy detection](#corpses-in-enemy-detection) | `lib/managers/group_ai_states/groupaistatebase` | `lua/GroupAIStateBase.lua` | Detection walks every corpse per unit and tick, bad frametime in big fights with a high corpse limit |
 | [Bot weapon when downed](#bot-weapon-when-downed) | `lib/units/player_team/teamaiinventory`, `huskteamaiinventory` | `lua/TeamAIInventory.lua` | A downed bot shoots with its weapon hidden |
+| [Turret gunner damage](#turret-gunner-damage) | `lib/units/weapons/turretweapon` | `lua/TurretWeapon.lua` | Possible engine crash from explosion damage with a destroyed attacker unit |
 
 ## Installation
 
@@ -217,3 +218,16 @@ place the weapon as before.
 - Only the local display changes, nothing is synced. Whether the hiding was intended (e.g. against clipping with the downed
   pose) is unknown; with the Luger and the M1911 it looked fine.
 - The weapon also stays visible in other states that call the hide callback for bots (not checked: revive, carry).
+
+## Turret gunner damage
+
+`TurretWeapon:on_puppet_damaged` calls `attacker_unit:movement()` and `send_to_peers_synched(..., attacker_unit)` without checking
+the unit. `FlamerTank` stores `peer:unit()` of the last molotov sync and uses it as the attacker of the explosion. If that unit
+was destroyed in between, the call is an engine access violation (seen on the host, stack ended in `on_puppet_damaged`).
+
+The hook returns early if `damage_info.attacker_unit` is not `alive()`.
+
+### Risks
+
+- Cause is a hypothesis from the Lua stack (the native callstack has no symbols), not reproduced.
+- Damage to the gunner from such an explosion does not dazed-deactivate the turret.

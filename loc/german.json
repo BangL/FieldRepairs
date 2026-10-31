@@ -21,5 +21,8 @@
   "fieldrepairs_attention_corpses_desc": "Überspringt Leichen und Verbündete in der Gegner-Erkennung. Viel schneller bei großen Gefechten.",
 
   "fieldrepairs_bot_weapon": "Bot-Waffe im Downed-Zustand",
-  "fieldrepairs_bot_weapon_desc": "Hält die Waffe eines gedownten Bots sichtbar. Vanilla blendet sie aus, der Bot schießt dann mit unsichtbarer Waffe."
+  "fieldrepairs_bot_weapon_desc": "Hält die Waffe eines gedownten Bots sichtbar. Vanilla blendet sie aus, der Bot schießt dann mit unsichtbarer Waffe.",
+
+  "fieldrepairs_turret_attacker": "Schaden an Turret-Schützen",
+  "fieldrepairs_turret_attacker_desc": "Ignoriert Schaden an Turret-Schützen, deren Angreifer-Unit nicht mehr existiert. Verhindert einen möglichen Engine-Crash."
 }
