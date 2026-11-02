@@ -24,5 +24,8 @@
   "fieldrepairs_bot_weapon_desc": "Hält die Waffe eines gedownten Bots sichtbar. Vanilla blendet sie aus, der Bot schießt dann mit unsichtbarer Waffe.",
 
   "fieldrepairs_turret_attacker": "Schaden an Turret-Schützen",
-  "fieldrepairs_turret_attacker_desc": "Ignoriert Schaden an Turret-Schützen, deren Angreifer-Unit nicht mehr existiert. Verhindert einen möglichen Engine-Crash."
+  "fieldrepairs_turret_attacker_desc": "Ignoriert Schaden an Turret-Schützen, deren Angreifer-Unit nicht mehr existiert. Verhindert einen möglichen Engine-Crash.",
+
+  "fieldrepairs_walk_update": "Lauf-Action nach Neustart",
+  "fieldrepairs_walk_update_desc": "Überspringt das Update der Lauf-Action bereits abgebauter Units (z.B. Bots beim Client nach Mission-Neustart des Hosts) und fängt Fehler ab. Verhindert einen möglichen Engine-Crash."
 }

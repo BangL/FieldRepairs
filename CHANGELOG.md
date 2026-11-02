@@ -1,3 +1,6 @@
+0.5.3:
+- fix: possible engine crash when a client's bot walk action updates after the host restarted the mission
+
 0.5.2:
 - fix: possible engine crash when a turret gunner is damaged by an explosion with a destroyed attacker unit
 

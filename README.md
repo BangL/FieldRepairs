@@ -17,6 +17,19 @@ Author: BangL
 | [Bot weapon when downed](#bot-weapon-when-downed) | `lib/units/player_team/teamaiinventory`, `huskteamaiinventory` | `lua/TeamAIInventory.lua` | A downed bot shoots with its weapon hidden |
 | [Turret gunner damage](#turret-gunner-damage) | `lib/units/weapons/turretweapon` | `lua/TurretWeapon.lua` | Possible engine crash from explosion damage with a destroyed attacker unit |
 
+## Bot walk action after mission restart
+
+`CopActionWalk:update` can run for a husk bot (`HuskTeamAIMovement:_upd_actions`) after the host restarted the mission and the
+unit was torn down on the client. An extension (`_ext_base`/`_ext_anim`) is nil, the Lua error reaches the engine update uncaught
+and the game dies with a C++ exception.
+
+The hook skips the update if the unit is gone or an extension is missing, and wraps the rest in `blt.pcall` (errors are logged).
+
+### Risks
+
+- Cause is a hypothesis from the Lua stack (client crash during a host mission restart), not reproduced.
+- The `blt.pcall` swallows any other error in the walk update too, so a bug there shows only as a log line and a stuck unit.
+
 ## Installation
 
 copy the `Field Repairs` folder to `mods/`. Requires SuperBLT 2.x (`blt.pcall`, `BLT:Log`).

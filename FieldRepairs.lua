@@ -15,6 +15,7 @@ FieldRepairs.fixes = {
 	"attention_corpses",
 	"bot_weapon",
 	"turret_attacker",
+	"walk_update",
 }
 FieldRepairs.config = {}
 

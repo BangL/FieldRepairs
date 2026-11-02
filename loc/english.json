@@ -24,5 +24,8 @@
   "fieldrepairs_bot_weapon_desc": "Keeps the weapon of a downed bot visible. Vanilla hides it, so the bot shoots with an invisible weapon.",
 
   "fieldrepairs_turret_attacker": "Turret gunner damage",
-  "fieldrepairs_turret_attacker_desc": "Ignores damage to turret gunners whose attacker unit no longer exists. Prevents a possible engine crash."
+  "fieldrepairs_turret_attacker_desc": "Ignores damage to turret gunners whose attacker unit no longer exists. Prevents a possible engine crash.",
+
+  "fieldrepairs_walk_update": "Walk action after restart",
+  "fieldrepairs_walk_update_desc": "Skips the walk action update of units that are already torn down (e.g. bots on a client after a host mission restart) and catches errors. Prevents a possible engine crash."
 }
