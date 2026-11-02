@@ -1,6 +1,6 @@
 -- A bot that goes down hides its weapon: the downed animation calls CopInventory's hide_weapon callback, which ends in
 -- PlayerInventory:hide_equipped_unit. The bot keeps shooting with a weapon nobody can see. The weapon stays visible for
--- bots (and their husks) except in stealth before the first alert (cool); equipping and unequipping still show and place it as before.
+-- bots (and their husks) only while the enemy weapons are hot (loud); in camp and stealth hiding works as in vanilla; equipping and unequipping still show and place it as before.
 
 local function patch(class)
 	if not class or class._blt_bot_weapon_fix then
@@ -11,7 +11,7 @@ local function patch(class)
 	local hide_equipped_unit = class.hide_equipped_unit
 
 	function class:hide_equipped_unit(...)
-		if FieldRepairs:IsEnabled("bot_weapon") and not self._unit:movement():cool() then
+		if FieldRepairs:IsEnabled("bot_weapon") and managers.groupai and managers.groupai:state():enemy_weapons_hot() then
 			return
 		end
 

@@ -1,3 +1,6 @@
+0.5.4:
+- fix: bot weapon when downed stays visible only while loud (camp, stealth and animations like peeing keep the vanilla hide)
+
 0.5.3:
 - fix: possible engine crash when a client's bot walk action updates after the host restarted the mission
 
