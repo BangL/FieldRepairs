@@ -1,3 +1,6 @@
+0.5.5:
+- fix: outline of teammates loses the legs behind walls, occlusion culling is skipped for the lod objects and the customization parts of an outlined character
+
 0.5.4:
 - fix: bot weapon when downed stays visible only while loud (camp, stealth and animations like peeing keep the vanilla hide)
 

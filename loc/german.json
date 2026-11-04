@@ -26,6 +26,9 @@
   "fieldrepairs_turret_attacker": "Schaden an Turret-Schützen",
   "fieldrepairs_turret_attacker_desc": "Ignoriert Schaden an Turret-Schützen, deren Angreifer-Unit nicht mehr existiert. Verhindert einen möglichen Engine-Crash.",
 
+  "fieldrepairs_contour_occlusion": "Abgeschnittene Charakter-Outline",
+  "fieldrepairs_contour_occlusion_desc": "Überspringt Occlusion-Culling auf den LOD-Gruppen und Customization-Teilen (Beine, Oberkörper, Kopf) eines umrandeten Charakters. Behebt Outlines, denen hinter Wänden die Beine fehlen.",
+
   "fieldrepairs_walk_update": "Lauf-Action nach Neustart",
   "fieldrepairs_walk_update_desc": "Überspringt das Update der Lauf-Action bereits abgebauter Units (z.B. Bots beim Client nach Mission-Neustart des Hosts) und fängt Fehler ab. Verhindert einen möglichen Engine-Crash."
 }

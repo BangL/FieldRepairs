@@ -71,9 +71,19 @@ local function part_loaded_callback_fixed(self, params)
 end
 
 function CharacterCustomization:_part_loaded_callback(params)
+	local result
 	if FieldRepairs:IsEnabled("husk_customization") then
-		return part_loaded_callback_fixed(self, params)
+		result = part_loaded_callback_fixed(self, params)
+	else
+		result = part_loaded_callback(self, params)
 	end
 
-	return part_loaded_callback(self, params)
+	-- the parts are attached after the character was spawned (and had its occlusion removed, e.g. in TeamAIBase:init), so
+	-- parts attached later inherit the skip, see OcclusionManager.lua
+	if FieldRepairs:IsEnabled("contour_occlusion") and alive(self._unit) and managers.occlusion
+		and managers.occlusion._skip_occlusion[self._unit:key()] then
+		managers.occlusion:set_skip_attached(self._unit, true)
+	end
+
+	return result
 end

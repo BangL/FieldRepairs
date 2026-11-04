@@ -26,6 +26,9 @@
   "fieldrepairs_turret_attacker": "Turret gunner damage",
   "fieldrepairs_turret_attacker_desc": "Ignores damage to turret gunners whose attacker unit no longer exists. Prevents a possible engine crash.",
 
+  "fieldrepairs_contour_occlusion": "Cut-off character outline",
+  "fieldrepairs_contour_occlusion_desc": "Skips occlusion culling on the LOD groups and customization parts (legs, upper body, head) of an outlined character. Fixes outlines that lose the legs behind walls.",
+
   "fieldrepairs_walk_update": "Walk action after restart",
   "fieldrepairs_walk_update_desc": "Skips the walk action update of units that are already torn down (e.g. bots on a client after a host mission restart) and catches errors. Prevents a possible engine crash."
 }

@@ -16,6 +16,7 @@ FieldRepairs.fixes = {
 	"bot_weapon",
 	"turret_attacker",
 	"walk_update",
+	"contour_occlusion",
 }
 FieldRepairs.config = {}
 

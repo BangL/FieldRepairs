@@ -15,6 +15,7 @@ Author: BangL
 | [Portal group unit leak](#portal-group-unit-leak) | `core/lib/managers/coreportalmanager` | `lua/CorePortalManager.lua` | Removed units stay referenced in portal unit groups |
 | [Corpses in enemy detection](#corpses-in-enemy-detection) | `lib/managers/group_ai_states/groupaistatebase` | `lua/GroupAIStateBase.lua` | Detection walks every corpse per unit and tick, bad frametime in big fights with a high corpse limit |
 | [Bot weapon when downed](#bot-weapon-when-downed) | `lib/units/player_team/teamaiinventory`, `huskteamaiinventory` | `lua/TeamAIInventory.lua` | A downed bot shoots with its weapon hidden |
+| [Cut-off character outline](#cut-off-character-outline) | `lib/managers/occlusionmanager`, `lib/units/characters/charactercustomization` | `lua/OcclusionManager.lua`, `lua/CharacterCustomization.lua` | Outline of a teammate loses the legs behind a wall |
 | [Turret gunner damage](#turret-gunner-damage) | `lib/units/weapons/turretweapon` | `lua/TurretWeapon.lua` | Possible engine crash from explosion damage with a destroyed attacker unit |
 
 ## Bot walk action after mission restart
@@ -231,6 +232,26 @@ place the weapon as before.
 - Only the local display changes, nothing is synced. Whether the hiding was intended (e.g. against clipping with the downed
   pose) is unknown; with the Luger and the M1911 it looked fine.
 - The weapon also stays visible in other states that call the hide callback for bots (not checked: revive, carry).
+
+## Cut-off character outline
+
+The outline (contour) of a teammate lost its legs (customization part `lower`) behind walls near the player; torso and head
+stayed. While that happens only the `lower` unit reports `Unit:occluded() == true` (`occlusion_time` > 0).
+
+`ContourExt` calls `OcclusionManager:remove_occlusion(unit)` with the main unit; that sets `set_skip_occlusion(true)` on its
+`model` objects only. Characters consist of attached customization units (`customization():attached_units()`), and every unit
+has `lod` objects (the LOD groups), which also have `set_skip_occlusion`. Neither was covered. Setting the skip on the `model` objects
+of the parts did nothing; on the `lod` objects of the parts the legs came back at once (checked live on Rivet).
+
+The hook sets (and on `add_occlusion` resets) `set_skip_occlusion` on the `model` and `lod` objects of the unit and of its attached
+parts. The parts of husks and bots are attached after the character was spawned: `CharacterCustomization:_part_loaded_callback` applies
+the skip to parts attached later.
+
+### Risks
+
+- The parts of an outlined character are not culled by occlusion, a few more draw calls per outlined character.
+- Not checked: whether `lod` on the parts alone is enough (live test covered all lod objects of all customization parts).
+- Parts attached after the contour was applied without going through `_part_loaded_callback` are not covered.
 
 ## Turret gunner damage
 
